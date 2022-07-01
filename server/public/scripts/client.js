@@ -4,8 +4,8 @@ function onReady(){
     getTasks();
     $( '#submitBtn' ).on( 'click', addTask );
     $( '#taskList' ).on( 'click', '.btnComplete', markComplete );
+    $( '#taskList' ).on( 'click', '.btnIncomplete', markIncomplete );
     $( '#taskList' ).on( 'click', '.btnDelete', deleteTask );
-
 
 }
 
@@ -25,31 +25,30 @@ function renderTasks(toDo){
 // empty the table from the loop of the last page load
     $('#taskList').empty();
 
-    for(let i = 0; i < toDo.length; i += 1) {
+    for(let i = 0; i < toDo.length; i ++) {
         let task = toDo[i];
     
 // For each task, append a new row to our table
         $('#taskList').append(`
             <tr>
-                <td class="completeStatus"> ${task.completed}
-                </td>
+                <td class="completeStatus"> ${task.completed}</td>
                 <td class="newTask">${task.tasks}</td>
-                <td>
-                <button 
+                <td><button 
                     data-id=${task.id}
                     data-status=${task.completed}
                     class="btnComplete"> ✓ </button>
-                </td>
-                <td>
-                <button 
+                    <button 
                     data-id=${task.id}
-                    class="btnDelete">DELETE TASK</button>
-                </td>
+                    data-status=${task.completed}
+                    class="btnIncomplete"> ! </button></td>
+                <td><button 
+                    data-id=${task.id}
+                    class="btnDelete">DELETE TASK</button></td>
             </tr>
         `);
         if( task.completed === true ){
             $( '.newTask').closest( 'td' ).addClass( 'completed' );
-        } else if( task.completed === false ){
+        } else if( task.completed !==true ){
             $( '.newTask' ).closest( 'td' ).addClass( 'incomplete' );
         }
     }
@@ -83,14 +82,30 @@ function markComplete(){
     let taskId = $(this).data('id');
     let taskStatus = $(this).data('status');
 
-    console.log(taskStatus);
-
     $.ajax({
         method: 'PUT',
         url: `/tasks/${taskId}`,
         data: {completed: taskStatus}
     }).then(function (){
     //    alert('Congrats on finishing your task!');
+        getTasks();
+    })
+    .catch(function (error){
+        alert('Error on updating task status', error)
+    })
+};
+
+
+function markIncomplete(){
+    console.log( 'This incomplete clicker is working');
+    let taskId = $(this).data('id');
+    let taskStatus = $(this).data('status');
+
+    $.ajax({
+        method: 'PUT',
+        url: `/tasks/status/${taskId}`,
+        data: {completed: taskStatus}
+    }).then(function (){
         getTasks();
     })
     .catch(function (error){

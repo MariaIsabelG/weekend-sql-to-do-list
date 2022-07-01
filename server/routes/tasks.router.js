@@ -6,7 +6,7 @@ const pool = require('../modules/pool')
 
 // Get all books
 router.get('/', (req, res) => {
-    let queryText = 'SELECT * FROM "tasks" ORDER BY "completed";';
+    let queryText = 'SELECT * FROM "tasks";';
     pool.query(queryText).then(result => {
 // Sends back the results in an object
     res.send(result.rows);
@@ -45,6 +45,28 @@ router.put('/:id', (req, res) => {
   
   if(status !== true){
     queryText = 'UPDATE "tasks" SET "completed" = true WHERE "id" = $1;';
+  } else {
+    res.sendStatus(500);
+  }
+  pool.query(queryText, [taskId])
+  .then((dbResponse) => {
+    res.send(dbResponse);
+  })
+  .catch((error) =>{
+    console.log(`Error in update query PUT: ${error}`);
+    res.sendStatus(500);
+  })
+});
+
+router.put('/status/:id', (req, res) => {
+  let taskId = Number(req.params.id);
+  let status = req.body.completed;
+  let queryText;
+
+  console.log( 'This might be working:', status);
+  
+  if(status !== true){
+    queryText = 'UPDATE "tasks" SET "completed" = false WHERE "id" = $1;';
   } else {
     res.sendStatus(500);
   }
