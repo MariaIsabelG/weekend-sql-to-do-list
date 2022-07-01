@@ -1,5 +1,6 @@
 const pg = require('pg');
 
+// connect to the database using a port
 const config = {
   database: 'weekend-to-do-app', 
   host: 'localhost', 
