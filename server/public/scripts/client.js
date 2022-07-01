@@ -34,8 +34,8 @@ function renderTasks(toDo){
 // For each task, append a new row to our table
         $('#taskList').append(`
             <tr>
-                <td>${task.tasks}</td>
                 <td>${task.completed}</td>
+                <td>${task.tasks}</td>
                 <td>
                 <button
                     data-id=${task.id}
@@ -53,8 +53,27 @@ function renderTasks(toDo){
                 </td>
             </tr>
         `);
-        }
-      }
+    }
+};
 
+function addTask() {
+// Get info to send to the server
+    const taskToSend = {
+        tasks: $('#taskIn').val(), 
+    };
 
+    console.log('Adding task', taskToSend);
+
+// Send the new task to the server as data
+    $.ajax({
+        method: 'POST',
+        url: '/tasks',
+        data: taskToSend
+    }).then(function(response) {
+        console.log(response);
+        getTasks();
+    }).catch(function(error) {
+        console.log('error in task Post', error); 
+        alert('Error adding artist. Please try again later.')       
+    });
 }
