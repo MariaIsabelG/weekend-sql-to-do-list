@@ -17,6 +17,23 @@ router.get('/', (req, res) => {
     });
   });
 
+// POST request to the database
+router.post('/', (req, res) => {
+  const newTask = req.body;
+// Command to the db as soon as the new data hits the database
+  const queryText = `
+      INSERT INTO "tasks" ("tasks")
+      VALUES ($1);
+      `;
+  pool.query(queryText, [newTask.tasks])
+      .then((result) => {
+      res.sendStatus(201);
+  })
+  .catch((error) => {
+      console.log( 'Error POSTing to db:', error);
+      res.sendStatus(500);
+  });
+});
 
 
 
