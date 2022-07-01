@@ -3,6 +3,7 @@ $(document).ready( onReady );
 function onReady(){
     getTasks();
     $( '#submitBtn' ).on( 'click', addTask );
+    $( '#taskList' ).on( 'click', '#btn-complete', markComplete );
 
 
 
@@ -41,13 +42,13 @@ function renderTasks(toDo){
                 <button
                     data-id=${task.id}
                     data-status=${task.completed}
-                    class="btn-read"
+                    class="btn-complete"
                     > MARK AS COMPLETED</button>
                 <button
                     data-id=${task.id}
                     data-status=${task.completed}
-                    class="btn-unread"
-                    > MARK AS UNCOMPLETED</button>
+                    class="btn-incomplete"
+                    > MARK AS INCOMPLETE</button>
                 <button 
                     data-id=${task.id}
                     class="btn-delete">DELETE TASK</button>
@@ -73,8 +74,26 @@ function addTask() {
     }).then(function(response) {
         console.log(response);
         getTasks();
+        $( '#taskIn').val('');
     }).catch(function(error) {
         console.log('error in task Post', error); 
         alert('Error adding artist. Please try again later.')       
     });
-}
+};
+
+function markComplete(){
+    let taskId = $(this).data('id');
+    let taskStatus = $(this).data('status');
+
+    $.ajax({
+        method: 'PUT',
+        url: `/${taskId}`,
+        data: {status: taskStatus}
+    }).then(function (){
+        alert('Congrats on finishing your task!');
+        getTasks();
+    })
+    .catch(function (error){
+      alert('Error on updating task status', error)
+    })
+  };
