@@ -28,27 +28,17 @@ function renderTasks(toDo){
     for(let i = 0; i < toDo.length; i += 1) {
         let task = toDo[i];
 
-        if( task.completed === false){
-        task.completed = 'Not completed'
-        }  else if( task.completed === true){
-            task.completed = 'Completed'
-        }
+
 // For each task, append a new row to our table
         $('#taskList').append(`
             <tr>
-                <td>${task.completed}</td>
+                <td>
+                    <label class="container">
+                    <input class="checkbox" data-status=${task.completed} type="checkbox" unchecked="unchecked">
+                    </label>
+                </td>
                 <td>${task.tasks}</td>
                 <td>
-                <button
-                    data-id=${task.id}
-                    data-status=${task.completed}
-                    class="btn-complete"
-                    > MARK AS COMPLETED</button>
-                <button
-                    data-id=${task.id}
-                    data-status=${task.completed}
-                    class="btn-incomplete"
-                    > MARK AS INCOMPLETE</button>
                 <button 
                     data-id=${task.id}
                     class="btn-delete">DELETE TASK</button>
@@ -98,3 +88,22 @@ function markComplete(){
         alert('Error on updating task status', error)
     })
 };
+
+// <button
+    // data-id=${task.id}
+    // data-status=${task.completed}
+    // class="btn-complete"
+    // > MARK AS COMPLETED</button>
+
+//<button
+                    // data-id=${task.id}
+                    // data-status=${task.completed}
+                    // class="btn-incomplete"
+                    // > MARK AS INCOMPLETE</button>
+
+
+                    // if( task.completed === false){
+                    //     task.completed = 'Incompleted'
+                    //     }  else if( task.completed === true){
+                    //         task.completed = 'Completed'
+                    //     }
