@@ -2,6 +2,7 @@ $(document).ready( onReady );
 
 function onReady(){
     getTasks();
+    $( '#submitBtn' ).on( 'click', addTask );
 
 
 
