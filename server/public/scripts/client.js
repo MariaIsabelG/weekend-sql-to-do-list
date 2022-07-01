@@ -3,7 +3,7 @@ $(document).ready( onReady );
 function onReady(){
     getTasks();
     $( '#submitBtn' ).on( 'click', addTask );
-    $( '#taskList' ).on( 'click', '.btn-complete', markComplete );
+    $( '#taskList' ).on( 'click', '.checkbox', markComplete );
 
 
 
@@ -34,7 +34,7 @@ function renderTasks(toDo){
             <tr>
                 <td>
                     <label class="container">
-                    <input class="checkbox" data-status=${task.completed} type="checkbox" unchecked="unchecked">
+                    <input class="checkbox" data-id=${task.id} data-status=${task.completed} type="checkbox" unchecked="unchecked">
                     </label>
                 </td>
                 <td>${task.tasks}</td>
@@ -75,6 +75,7 @@ function markComplete(){
     console.log( 'This completed clicker is working');
     let taskId = $(this).data('id');
     let taskStatus = $(this).data('status');
+    $( this ).toggleClass( 'completed', true );
 
     $.ajax({
         method: 'PUT',

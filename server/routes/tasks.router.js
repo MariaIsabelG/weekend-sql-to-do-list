@@ -6,7 +6,7 @@ const pool = require('../modules/pool')
 
 // Get all books
 router.get('/', (req, res) => {
-    let queryText = 'SELECT * FROM "tasks";';
+    let queryText = 'SELECT * FROM "tasks" ORDER BY "completed";';
     pool.query(queryText).then(result => {
 // Sends back the results in an object
     res.send(result.rows);
@@ -37,12 +37,14 @@ router.post('/', (req, res) => {
 
 //Updates a task to show that it has been completed
 router.put('/:id', (req, res) => {
-  let taskId = req.params.id;
+  let taskId = Number(req.params.id);
   let status = req.body.completed;
   let queryText;
+
+  console.log( 'This might be working:', status);
   
   if(status !== true){
-    queryText = 'UPDATE "tasks" SET "completed" = True WHERE "id" = $1;';
+    queryText = 'UPDATE "tasks" SET "completed" = true WHERE "id" = $1;';
   } else {
     res.sendStatus(500);
   }
