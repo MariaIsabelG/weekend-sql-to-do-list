@@ -94,6 +94,6 @@ function markComplete(){
         getTasks();
     })
     .catch(function (error){
-      alert('Error on updating task status', error)
+        alert('Error on updating task status', error)
     })
-  };
+};

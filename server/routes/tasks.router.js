@@ -35,6 +35,26 @@ router.post('/', (req, res) => {
   });
 });
 
+// Updates a task to show that it has been completed
+router.put('/:id', (req, res) => {
+  let taskId = req.params.id;
+  let status = req.body.completed;
+  let queryText;
+  
+  if(status !== true){
+    queryText = 'UPDATE "tasks" SET "completed" = True WHERE "id" = $1;';
+  } else {
+    res.sendStatus(500);
+  }
+  pool.query(queryText, [taskId])
+  .then((dbResponse) => {
+    res.send(dbResponse);
+  })
+  .catch((error) =>{
+    console.log(`Error in update query PUT: ${error}`);
+    res.sendStatus(500);
+  })
+});
 
 
 
