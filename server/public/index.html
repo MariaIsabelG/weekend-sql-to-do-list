@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="text/javascript" src="vendors/jquery.js"></script>
+    <script type="text/javascript" src="scripts/client.js"></script>
+    <link rel="stylesheet" href="css/styles.css">
+    <title>✏️ Task Master</title>
+</head>
+<body>
+    <header>
+        <h1 id="pageTitle">Welcome to your Task Master!</h1>
+    </header>
+    <main>
+        <section>
+            <h2> Make your productivity dreams come true. Please add your task below</h2>
+            <label>✏️ Task:</label><input type="text" placeholder="Enter your task" id="taskIn"/>
+            <br />
+            <button type="button" id="submitBtn">ADD TASK</button>
+        </section>
+        <section>
+            <div>
+                <h3>Task List</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Status</th>
+                            <th>Task</th>
+                            <th>Edit status</th>
+                            <th>Delete</th>
+                        </tr>
+                    </thead>
+                    <tbody id="taskList">
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+    
+</body>
+</html>
