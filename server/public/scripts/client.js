@@ -3,7 +3,7 @@ $(document).ready( onReady );
 function onReady(){
     getTasks();
     $( '#submitBtn' ).on( 'click', addTask );
-    $( '#taskList' ).on( 'click', '#btn-complete', markComplete );
+    $( '#taskList' ).on( 'click', '.btn-complete', markComplete );
 
 
 
@@ -82,13 +82,14 @@ function addTask() {
 };
 
 function markComplete(){
+    console.log( 'This completed clicker is working');
     let taskId = $(this).data('id');
     let taskStatus = $(this).data('status');
 
     $.ajax({
         method: 'PUT',
-        url: `/${taskId}`,
-        data: {status: taskStatus}
+        url: `/tasks/${taskId}`,
+        data: {completed: taskStatus}
     }).then(function (){
         alert('Congrats on finishing your task!');
         getTasks();

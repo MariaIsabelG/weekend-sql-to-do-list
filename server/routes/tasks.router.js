@@ -35,7 +35,7 @@ router.post('/', (req, res) => {
   });
 });
 
-// Updates a task to show that it has been completed
+//Updates a task to show that it has been completed
 router.put('/:id', (req, res) => {
   let taskId = req.params.id;
   let status = req.body.completed;
@@ -55,7 +55,6 @@ router.put('/:id', (req, res) => {
     res.sendStatus(500);
   })
 });
-
 
 
 
