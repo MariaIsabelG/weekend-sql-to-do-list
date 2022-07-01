@@ -4,7 +4,7 @@ function onReady(){
     getTasks();
     $( '#submitBtn' ).on( 'click', addTask );
     $( '#taskList' ).on( 'click', '.btnComplete', markComplete );
-
+    $( '#taskList' ).on( 'click', '.btnDelete', deleteTask );
 
 
 }
@@ -28,8 +28,6 @@ function renderTasks(toDo){
     for(let i = 0; i < toDo.length; i += 1) {
         let task = toDo[i];
     
-    
-    
 // For each task, append a new row to our table
         $('#taskList').append(`
             <tr>
@@ -51,10 +49,8 @@ function renderTasks(toDo){
         `);
         if( task.completed === true ){
             $( '.newTask').closest( 'td' ).addClass( 'completed' );
-            task.completed = '✓';
         } else if( task.completed === false ){
             $( '.newTask' ).closest( 'td' ).addClass( 'incomplete' );
-            task.completed = '';
         }
     }
 };
@@ -102,21 +98,17 @@ function markComplete(){
     })
 };
 
-// <button
-    // data-id=${task.id}
-    // data-status=${task.completed}
-    // class="btn-complete"
-    // > MARK AS COMPLETED</button>
-
-//<button
-                    // data-id=${task.id}
-                    // data-status=${task.completed}
-                    // class="btn-incomplete"
-                    // > MARK AS INCOMPLETE</button>
-
-
-                    // if( task.completed === false){
-                    //     task.completed = 'Incompleted'
-                    //     }  else if( task.completed === true){
-                    //         task.completed = 'Completed'
-                    //     }
+function deleteTask(){
+    let taskId = $(this).data('id');
+    $.ajax({
+        method: 'DELETE',
+        url: `/tasks/${taskId}`,
+        })
+    .then( function(response){
+        console.log('Task has been deleted!');
+        getTasks();
+        })
+        .catch(function (error){
+        alert('Task could not be deleted', error);
+        })
+    };
