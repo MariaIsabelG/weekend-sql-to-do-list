@@ -48,7 +48,7 @@ function renderTasks(toDo){
         `);
         if( task.completed === true ){
             $( '.newTask').closest( 'td' ).addClass( 'completed' );
-        } else if( task.completed !==true ){
+        } else{
             $( '.newTask' ).closest( 'td' ).addClass( 'incomplete' );
         }
     }
@@ -127,3 +127,4 @@ function deleteTask(){
         alert('Task could not be deleted', error);
         })
     };
+
