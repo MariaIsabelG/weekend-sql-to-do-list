@@ -3,7 +3,7 @@ $(document).ready( onReady );
 function onReady(){
     getTasks();
     $( '#submitBtn' ).on( 'click', addTask );
-    $( '#taskList' ).on( 'click', '.checkbox', markComplete );
+    $( '#taskList' ).on( 'click', '.btnComplete', markComplete );
 
 
 
@@ -27,24 +27,35 @@ function renderTasks(toDo){
 
     for(let i = 0; i < toDo.length; i += 1) {
         let task = toDo[i];
-
-
+    
+    
+    
 // For each task, append a new row to our table
         $('#taskList').append(`
             <tr>
-                <td>
-                    <label class="container">
-                    <input class="checkbox" data-id=${task.id} data-status=${task.completed} type="checkbox" unchecked="unchecked">
-                    </label>
+                <td class="completeStatus"> ${task.completed}
                 </td>
-                <td>${task.tasks}</td>
+                <td class="newTask">${task.tasks}</td>
                 <td>
                 <button 
                     data-id=${task.id}
-                    class="btn-delete">DELETE TASK</button>
+                    data-status=${task.completed}
+                    class="btnComplete"> ✓ </button>
+                </td>
+                <td>
+                <button 
+                    data-id=${task.id}
+                    class="btnDelete">DELETE TASK</button>
                 </td>
             </tr>
         `);
+        if( task.completed === true ){
+            $( '.newTask').closest( 'td' ).addClass( 'completed' );
+            task.completed = '✓';
+        } else if( task.completed === false ){
+            $( '.newTask' ).closest( 'td' ).addClass( 'incomplete' );
+            task.completed = '';
+        }
     }
 };
 
@@ -75,14 +86,15 @@ function markComplete(){
     console.log( 'This completed clicker is working');
     let taskId = $(this).data('id');
     let taskStatus = $(this).data('status');
-    $( this ).toggleClass( 'completed', true );
+
+    console.log(taskStatus);
 
     $.ajax({
         method: 'PUT',
         url: `/tasks/${taskId}`,
         data: {completed: taskStatus}
     }).then(function (){
-        alert('Congrats on finishing your task!');
+    //    alert('Congrats on finishing your task!');
         getTasks();
     })
     .catch(function (error){

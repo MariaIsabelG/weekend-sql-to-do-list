@@ -1,3 +1,6 @@
 .completed{
-    background-color: green;
+    color: green;
+}
+.incomplete{
+    color: red;
 }
