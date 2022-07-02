@@ -25,9 +25,14 @@ function renderTasks(toDo){
 // empty the table from the loop of the last page load
     $('#taskList').empty();
 
-    for(let i = 0; i < toDo.length; i ++) {
+    for(let i = 0; i < toDo.length; i +=1) {
         let task = toDo[i];
     
+        if( task.completed === false){
+            task.completed = 'incomplete'
+        }  else if( task.completed === true){
+            task.completed = 'complete'
+        }
 // For each task, append a new row to our table
         $('#taskList').append(`
             <tr>
@@ -46,11 +51,11 @@ function renderTasks(toDo){
                     class="btnDelete">DELETE TASK</button></td>
             </tr>
         `);
-        if( task.completed === true ){
-            $( '.newTask').closest( 'td' ).addClass( 'completed' );
-        } else{
-            $( '.newTask' ).closest( 'td' ).addClass( 'incomplete' );
-        }
+        // if( task.completed === true ){
+        //     $( '.newTask').closest( 'td' ).addClass( 'completed' );
+        // } else{
+        //     $( '.newTask' ).closest( 'td' ).addClass( 'incomplete' );
+        // }
     }
 };
 
@@ -78,23 +83,21 @@ function addTask() {
 };
 
 function markComplete(){
-    console.log( 'This completed clicker is working');
     let taskId = $(this).data('id');
     let taskStatus = $(this).data('status');
 
     $.ajax({
         method: 'PUT',
         url: `/tasks/${taskId}`,
-        data: {completed: taskStatus}
+        data: {status: taskStatus}
     }).then(function (){
-    //    alert('Congrats on finishing your task!');
+        alert('Congrats on finishing your task!'); 
         getTasks();
     })
     .catch(function (error){
         alert('Error on updating task status', error)
     })
 };
-
 
 function markIncomplete(){
     console.log( 'This incomplete clicker is working');
