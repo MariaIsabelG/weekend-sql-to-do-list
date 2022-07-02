@@ -11,30 +11,28 @@
 </head>
 <body>
     <header>
-        <h1 id="pageTitle">Welcome to your Task Master!</h1>
-    </header>
+        <h1 id="pageTitle"><iframe class="gif" src="https://giphy.com/embed/AI5hHIDY74BC68LUls" width="200" height="100" frameBorder="0" class="giphy-embed" allowFullScreen></iframe></h1>
+    </header>    
     <main>
-        <section>
+        <div class="intro">
             <h2> Make your productivity dreams come true by adding your task below!</h2>
             <label>✏️ Task: </label><input type="text" placeholder="Enter your task" id="taskIn" size="50"/>
             <button type="button" id="submitBtn">ADD TASK</button>
-        </section>
-        <section>
-            <div>
-                <h3>Task List</h3>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Task</th>
-                            <th>Edit Completion</th>
-                            <th>Delete</th>
-                        </tr>
-                    </thead>
-                    <tbody id="taskList">
-                    </tbody>
-                </table>
-            </div>
-        </section>
+        </div>
+        <div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Completion</th>
+                        <th>Task</th>
+                        <th>Edit Completion</th>
+                        <th>Delete</th>
+                    </tr>
+                </thead>
+                <tbody id="taskList">
+                </tbody>
+            </table>
+        </div>
     </main>
     
 </body>
