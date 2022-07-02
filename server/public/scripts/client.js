@@ -24,15 +24,14 @@ function getTasks(){
 function renderTasks(toDo){
 // empty the table from the loop of the last page load
     $('#taskList').empty();
-    
+
 for(let i = 0; i < toDo.length; i +=1) {
     let task = toDo[i];
 
-// For each task, append a new row to our table
+    if( task.completed === true ){
         $('#taskList').append(`
             <tr id=newRow>
-                <td class="completeStatus"> ${task.completed}</td>
-                <td class="newTask">${task.tasks}</td>
+                <td class="completed">${task.tasks}</td>
                 <td><button 
                     data-id=${task.id}
                     data-status=${task.completed}
@@ -45,16 +44,33 @@ for(let i = 0; i < toDo.length; i +=1) {
                     data-id=${task.id}
                     class="btnDelete">DELETE TASK</button></td>
             </tr>
-        `);
-        if( task.completed === false ){
-            console.log( 'In render:', task.completed );
-            $( '#newRow' ).children( '.newTask').addClass( 'incomplete' );
-        }else {
-            $( '#newRow' ).children( '.newTask' ).addClass( 'completed' );
-            }
+        `); 
+    } else if( task.completed === false ){
+        $('#taskList').append(`
+        <tr id=newRow>
+            <td class="incomplete">${task.tasks}</td>
+            <td><button 
+                data-id=${task.id}
+                data-status=${task.completed}
+                class="btnComplete"> ✓ </button>
+                <button 
+                data-id=${task.id}
+                data-status=${task.completed}
+                class="btnIncomplete"> ! </button></td>
+            <td><button 
+                data-id=${task.id}
+                class="btnDelete">DELETE TASK</button></td>
+        </tr>
+    `); 
     }
-    
+    }
 };
+
+function changeColor(){ 
+    $( this ).parents( '.newTask' ).addClass( 'completed' );
+};
+
+
 
 function addTask() {
 // Get info to send to the server

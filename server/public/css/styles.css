@@ -4,3 +4,26 @@
 .incomplete{
     color: red;
 }
+.btnComplete{
+    background-color: rgb(9, 175, 9);
+    border-radius: 7px;
+    border-color: yellowgreen;
+    margin-right: 10px;
+    text-align: center;
+
+}
+.btnIncomplete{
+    background-color: grey;
+    border-radius: 7px;
+    border-color: darkgray;
+    text-align: center;
+}
+.btnDelete{
+    background-color: red;
+    border-radius: 7px;
+    border-color: darkred;
+}
+td{
+    padding-left: ;
+}
+
