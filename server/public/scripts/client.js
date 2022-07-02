@@ -49,7 +49,7 @@ for(let i = 0; i < toDo.length; i +=1) {
     } else if( task.completed === false ){
         $('#taskList').append(`
         <tr id=newRow>
-            <td class="status"></td>
+            <td class="status">⭕️</td>
             <td class="incomplete">${task.tasks}</td>
             <td><button 
                 data-id=${task.id}
@@ -67,11 +67,6 @@ for(let i = 0; i < toDo.length; i +=1) {
     }
     }
 };
-
-function changeColor(){ 
-    $( this ).parents( '.newTask' ).addClass( 'completed' );
-};
-
 
 
 function addTask() {

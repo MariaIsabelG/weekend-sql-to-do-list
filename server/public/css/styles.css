@@ -1,5 +1,37 @@
+body{
+    font-family: fantasy;
+    text-align: center;
+
+}
+#submitBtn{
+    font-family: fantasy;
+}
+table{
+
+    width: 70%;
+    margin-top: 30px;
+    margin-left: auto;
+    margin-right: auto;
+}
+th{
+    color: white;
+    font-family: fantasy;
+    background-color: #0000a3;
+    text-align: center;
+    height: 40px; 
+}
+tbody tr:nth-child(odd) {
+    background-color:#eb84c9;
+}
+
+tbody tr:nth-child(even) {
+    background-color: #89f2dd;
+}
+td{
+    height: 30px;
+}
 .completed{
-    color: #0000a3;
+    color: rgb(114, 112, 112);
     text-decoration: line-through;
     padding-left: 10px;
     font-family: fantasy;
@@ -14,8 +46,6 @@
     border-radius: 7px;
     border-color: yellowgreen;
     margin: auto;
-
-
 }
 .btnIncomplete{
     background-color: rgb(249, 235, 87);
@@ -30,37 +60,6 @@
     border-color: red;
     text-align: center;
 }
-table{
 
-    width: 70%;
-    margin-top: 30px;
-    margin-left: auto;
-    margin-right: auto;
-
-
-}
-th{
-    color: white;
-    font-family: fantasy;
-    background-color: #0000a3;
-    text-align: center; 
-}
-
-tbody tr:nth-child(odd) {
-    background-color:#eb84c9;
-}
-
-tbody tr:nth-child(even) {
-    background-color: #89f2dd;
-}
-
-body{
-    font-family: fantasy;
-
-}
-
-.status, .intro, header  {
-    text-align: center;
-}
 
 
