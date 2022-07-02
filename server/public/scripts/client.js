@@ -42,7 +42,7 @@ for(let i = 0; i < toDo.length; i +=1) {
                     class="btnIncomplete"> ! </button></td>
                 <td><button 
                     data-id=${task.id}
-                    class="btnDelete">DELETE TASK</button></td>
+                    class="btnDelete">🗑</button></td>
             </tr>
         `); 
     } else if( task.completed === false ){
@@ -59,7 +59,7 @@ for(let i = 0; i < toDo.length; i +=1) {
                 class="btnIncomplete"> ! </button></td>
             <td><button 
                 data-id=${task.id}
-                class="btnDelete">DELETE TASK</button></td>
+                class="btnDelete">🗑</button></td>
         </tr>
     `); 
     }
