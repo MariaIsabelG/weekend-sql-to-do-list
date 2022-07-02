@@ -6,7 +6,7 @@ const pool = require('../modules/pool')
 
 // Get all books
 router.get('/', (req, res) => {
-    let queryText = 'SELECT * FROM "tasks";';
+    let queryText = 'SELECT * FROM "tasks" ORDER BY "completed";';
     pool.query(queryText).then(result => {
 // Sends back the results in an object
     res.send(result.rows);

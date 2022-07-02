@@ -24,18 +24,13 @@ function getTasks(){
 function renderTasks(toDo){
 // empty the table from the loop of the last page load
     $('#taskList').empty();
-
-    for(let i = 0; i < toDo.length; i +=1) {
-        let task = toDo[i];
     
-        if( task.completed === false){
-            task.completed = 'incomplete'
-        }  else if( task.completed === true){
-            task.completed = 'complete'
-        }
+for(let i = 0; i < toDo.length; i +=1) {
+    let task = toDo[i];
+
 // For each task, append a new row to our table
         $('#taskList').append(`
-            <tr>
+            <tr id=newRow>
                 <td class="completeStatus"> ${task.completed}</td>
                 <td class="newTask">${task.tasks}</td>
                 <td><button 
@@ -51,12 +46,14 @@ function renderTasks(toDo){
                     class="btnDelete">DELETE TASK</button></td>
             </tr>
         `);
-        // if( task.completed === true ){
-        //     $( '.newTask').closest( 'td' ).addClass( 'completed' );
-        // } else{
-        //     $( '.newTask' ).closest( 'td' ).addClass( 'incomplete' );
-        // }
+        if( task.completed === false ){
+            console.log( 'In render:', task.completed );
+            $( '#newRow' ).children( '.newTask').addClass( 'incomplete' );
+        }else {
+            $( '#newRow' ).children( '.newTask' ).addClass( 'completed' );
+            }
     }
+    
 };
 
 function addTask() {
@@ -90,8 +87,7 @@ function markComplete(){
         method: 'PUT',
         url: `/tasks/${taskId}`,
         data: {status: taskStatus}
-    }).then(function (){
-        alert('Congrats on finishing your task!'); 
+    }).then(function (){ 
         getTasks();
     })
     .catch(function (error){
