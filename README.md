@@ -17,9 +17,9 @@ Problems encoutered:
     Solution: 
    
     - Created two completion status buttons that allow the user to mark the task as completed or incompleted
-    - Created two put request that update the database and gathers all the updated tasks and their completions status
+    - Created two put requests that take commands to the database to change/update a task completion status
     - In the client side, created an if statement within a loop that reads the completion status of each task, then creates two different paths. If status is true, it gives the task a specific style in css. If the status is false, it gives the task a different style in css
-    - In the server side, created two put requests that take commands to the database to change/update a task completion status
+    
 
 - How to style the app so that it would not look html standard
 
