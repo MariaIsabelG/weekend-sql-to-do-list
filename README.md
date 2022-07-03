@@ -4,26 +4,31 @@ To-Do List
 
 ## Description
 
-Duration: 8hrs
+Duration: 10hrs
 
 Objective: 
 
-To create a calculator that receives an input, sends the input to the server, calculates on the server side, and returns the calculation result and the calculator's history to the DOM.
+To create an app where the user could input a task and keep track of which tasks have been completed and which tasks have not been completed. 
 
 Problems encoutered:
 
-- Decide how to organize the inputs once they get to the server
+- Decide how to manage the completion each task so the DOM and the database would be updated
 
-    Solution: created a new object on the server side with all the information that needs to be sent to the client.
+    Solution: 
+   
+    - Created two completion status buttons that allow the user to mark the task as completed or incompleted
+    - Created two put request that update the database and gathers all the updated tasks and their completions status
+    - In the client side, created an if statement within a loop that reads the completion status of each task, then creates two different paths. If status is true, it gives the task a specific style in css. If the status is false, it gives the task a different style in css
+    - In the server side, created two put requests that take commands to the database to change/update a task completion status
 
-- Find out how to calculate the inputs on the server side
+- How to style the app so that it would not look html standard
 
-    Solution: created a switch statements that get the operator string as a key and runs specific calculations based on the operator string received.
+    Solution:
 
-- Appending the history to the DOM without duplication
-
-    Solution: emptied the history selector before running a for loop.
+    - Looked at color pallets on the internet to understand what colors go together
+    - Decided what color to give which element on the table including the colors that are included in app functionalities (ex. change of font color when a task is completed)
 
 Next Steps: 
 
-- Style the calculator to be more user friendly
+- Learn how to insert checkboxes that can clicked on by the user to update the complete of a task on the DOM and in the database
+
