@@ -66,7 +66,7 @@ router.put('/status/:id', (req, res) => {
   let queryText;
 
   console.log( 'This might be working:', status);
-  
+  // not sure why this works 
   if(status !== true ){
     queryText = 'UPDATE "tasks" SET "completed" = False WHERE "id" = $1;';
   } else {

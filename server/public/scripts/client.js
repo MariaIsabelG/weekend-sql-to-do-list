@@ -3,10 +3,9 @@ $(document).ready( onReady );
 function onReady(){
     getTasks();
     $( '#submitBtn' ).on( 'click', addTask );
-    $( '#taskList' ).on( 'click', '.btnComplete', markComplete );
-    $( '#taskList' ).on( 'click', '.btnIncomplete', markIncomplete );
-    $( '#taskList' ).on( 'click', '.btnDelete', deleteTask );
-
+    $( '#taskList' ).on( 'click', '.btnComplete', markComplete );// Triggers PUT request that marks the completion true
+    $( '#taskList' ).on( 'click', '.btnIncomplete', markIncomplete );// Triggers PUT request that marks the completion false
+    $( '#taskList' ).on( 'click', '.btnDelete', deleteTask );// Triggers DELETE request
 }
 
 function getTasks(){
@@ -24,10 +23,10 @@ function getTasks(){
 function renderTasks(toDo){
 // empty the table from the loop of the last page load
     $('#taskList').empty();
-
+// loop through array of objects received from the db
 for(let i = 0; i < toDo.length; i +=1) {
     let task = toDo[i];
-
+// creates to path of styling to keep track of task completion by targeting the completed boolean in the bd
     if( task.completed === true ){
         $('#taskList').append(`
             <tr id=newRow>
@@ -93,9 +92,10 @@ function addTask() {
 };
 
 function markComplete(){
+// target the data to send to the server
     let taskId = $(this).data('id');
     let taskStatus = $(this).data('status');
-
+// task id will be the selector and task status will be data sent
     $.ajax({
         method: 'PUT',
         url: `/tasks/${taskId}`,
@@ -126,6 +126,7 @@ function markIncomplete(){
 };
 
 function deleteTask(){
+// target data to send to the server 
     let taskId = $(this).data('id');
     $.ajax({
         method: 'DELETE',
